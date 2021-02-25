@@ -6,20 +6,20 @@ Generate jsons for indexing marginalia. I ran it like this:
 3. inside the currend folder run
 ```bash
 for i in $(ls -1 | egrep '^[[:digit:]]+'); do
-    python parse.py $i > /jsons/$i.json
+    python parse.py $i > ./jsons/$i.json
 done
 ```
 """
 
 import xml.etree.ElementTree as ET
 import json
-from typing import Dict, Iterator
 
+from typing import Dict, Iterator
 from sys import argv
 from os import walk, listdir
 
 
-def parse_page(dirpath: str, filename: str) -> Iterator[Dict[str, str]]:
+def parse_page(dirpath: str, filename: str) -> Iterator[Dict[str, object]]:
     with open(f"{dirpath}/{filename}", "r") as f:
         xml_page_root = ET.fromstring(f.read())[1]
 
@@ -35,9 +35,8 @@ def parse_page(dirpath: str, filename: str) -> Iterator[Dict[str, str]]:
                 continue
 
             # filename format looks like VOLID_PAGENUM_PAGEID.xml
-            _, page, pageid = filename.split(".")[0].split("_")
-            entry = {"page": int(page),
-                     "page_id": int(pageid),
+            _, page_num, __ = filename.split(".")[0].split("_")
+            entry = {"page": int(page_num),
                      "text": marg_text.replace("\n", " ")}
 
             yield entry
@@ -57,6 +56,8 @@ def parse_volume(volume_dir_path: str) -> Dict[str, object]:
     for dp, __, filenames in [(dp, dn, fn) for (dp, dn, fn) in walk(argv[1])
                               if dp.endswith("page")]:
         for filename in [fn for fn in filenames if fn.endswith(".xml")]:
+            assert hasattr(vol["marginalia"], "append")
+
             for entry in parse_page(dp, filename):
                 vol["marginalia"].append(entry)
 
