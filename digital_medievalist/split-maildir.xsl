@@ -78,6 +78,10 @@
         </xsl:catch>
       </xsl:try>
     </xsl:for-each>
+    <!-- Write a gitignore file to the headers directory to keep it there, but empty (from Git's perspective). -->
+    <xsl:result-document href="{$maildir||'/out/headers/.gitignore'}">
+      <xsl:text># Exclude everything in this folder...&#xD;&#xa;*&#xD;&#xa;# ...except this file&#xD;&#xa;!.gitignore</xsl:text>
+    </xsl:result-document>
   </xsl:template>
 
   <xd:doc>
