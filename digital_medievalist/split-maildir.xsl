@@ -15,7 +15,6 @@
   </xd:doc>
   
   <!-- How to (Digital Medievalist list):
-    - download http://listserv.uleth.ca/mailman/private/dm-l.mbox/dm-l.mbox (login may be appended as ?username=uvw@xy.z&password=****, e.g. "wget -O dm.mbox http://listserv.uleth.ca/mailman/private/dm-l.mbox/dm-l.mbox?username=p.daengeli@uni-koeln.de&password=***")"
     - download https://listserv.uleth.ca/hyperkitty/list/dm-l@uleth.ca/export/dm-l@uleth.ca-2023-04.mbox.gz?start=2002-01-27&end=2023-04-28, e.g. "wget -O dm.mbox https://listserv.uleth.ca/hyperkitty/list/dm-l@uleth.ca/export/dm-l@uleth.ca-2023-04.mbox.gz?start=2002-01-27&end=2023-04-28" 
     - convert to maildir format using mb2md (the -s flag (source) requires an absolute path); install with "sudo apt install mb2md"; e.g. "mb2md -s /data/WORK/DH-unibe/pipermail/dm-l.mbox -d /data/WORK/DH-unibe/pipermail/Maildir"
     - point this transformation to the maildir directory and run it (using the $maildir parameter on L27, if desired also set other parameters)
@@ -37,6 +36,7 @@
   
   <xd:doc>
     <xd:desc>Cleanse the message (content type, transfer encoding, phishing warning, e-mail addresses).</xd:desc>
+    <xs:desc>NB: cleansing slows down the transformation, esp. calling replace(); deactivate for debugging/extending other areas of the script.</xd:desc>
   </xd:doc>
   <xsl:param name="cleanse" static="true" as="xs:boolean" select="true()"/>
   
