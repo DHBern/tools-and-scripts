@@ -18,6 +18,7 @@
     - download https://listserv.uleth.ca/hyperkitty/list/dm-l@uleth.ca/export/dm-l@uleth.ca-2023-04.mbox.gz?start=2002-01-27&end=2023-04-28, e.g. "wget -O dm.mbox https://listserv.uleth.ca/hyperkitty/list/dm-l@uleth.ca/export/dm-l@uleth.ca-2023-04.mbox.gz?start=2002-01-27&end=2023-04-28" 
     - convert to maildir format using mb2md (the -s flag (source) requires an absolute path); install with "sudo apt install mb2md"; e.g. "mb2md -s /data/WORK/DH-unibe/pipermail/dm-l.mbox -d /data/WORK/DH-unibe/pipermail/Maildir"
     - point this transformation to the maildir directory and run it (using the $maildir parameter on L27, if desired also set other parameters)
+    - after running the transformation it is adivsable to decode the quoted-printable encoding (execute qprint.sh from the output directory)
   -->
   
   <!-- ====================================================== 
